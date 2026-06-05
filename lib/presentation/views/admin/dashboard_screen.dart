@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../parking/parking_list_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -10,8 +11,8 @@ class DashboardScreen extends StatelessWidget {
 
       drawer: Drawer(
         child: ListView(
-          children: const [
-            DrawerHeader(
+          children: [
+            const DrawerHeader(
               decoration: BoxDecoration(color: Colors.blue),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,21 +28,32 @@ class DashboardScreen extends StatelessWidget {
             ),
 
             ListTile(
-              leading: Icon(Icons.local_parking),
-              title: Text("Parqueaderos"),
+              leading: const Icon(Icons.local_parking),
+              title: const Text("Parqueaderos"),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ParkingListScreen(),
+                  ),
+                );
+              },
             ),
 
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.directions_car),
               title: Text("Vehículos"),
             ),
 
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.receipt_long),
               title: Text("Reservas"),
             ),
 
-            ListTile(leading: Icon(Icons.bar_chart), title: Text("Reportes")),
+            const ListTile(
+              leading: Icon(Icons.bar_chart),
+              title: Text("Reportes"),
+            ),
           ],
         ),
       ),

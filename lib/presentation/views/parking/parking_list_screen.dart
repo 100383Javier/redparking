@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../viewmodels/parking_viewmodel.dart';
 import 'add_parking_screen.dart';
 
 class ParkingListScreen extends StatelessWidget {
@@ -6,6 +9,8 @@ class ParkingListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final parkingVM = Provider.of<ParkingViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(title: const Text("Parqueaderos")),
 
@@ -19,22 +24,17 @@ class ParkingListScreen extends StatelessWidget {
         child: const Icon(Icons.add),
       ),
 
-      body: ListView(
-        children: const [
-          ListTile(
-            leading: Icon(Icons.local_parking),
-            title: Text("Parqueadero Centro"),
-            subtitle: Text("20 cupos disponibles"),
-          ),
+      body: ListView.builder(
+        itemCount: parkingVM.parkings.length,
+        itemBuilder: (context, index) {
+          final parking = parkingVM.parkings[index];
 
-          Divider(),
-
-          ListTile(
-            leading: Icon(Icons.local_parking),
-            title: Text("Parqueadero Norte"),
-            subtitle: Text("15 cupos disponibles"),
-          ),
-        ],
+          return ListTile(
+            leading: const Icon(Icons.local_parking),
+            title: Text(parking.nombre),
+            subtitle: Text("${parking.cuposDisponibles} cupos disponibles"),
+          );
+        },
       ),
     );
   }

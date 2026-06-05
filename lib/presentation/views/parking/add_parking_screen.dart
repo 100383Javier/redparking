@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../domain/entities/parking.dart';
+import '../../viewmodels/parking_viewmodel.dart';
 
 class AddParkingScreen extends StatefulWidget {
   const AddParkingScreen({super.key});
@@ -67,6 +71,19 @@ class _AddParkingScreenState extends State<AddParkingScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
+                  final parking = Parking(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    nombre: nombreController.text,
+                    direccion: direccionController.text,
+                    cuposDisponibles: int.tryParse(cuposController.text) ?? 0,
+                    tarifaHora: double.tryParse(tarifaController.text) ?? 0,
+                  );
+
+                  Provider.of<ParkingViewModel>(
+                    context,
+                    listen: false,
+                  ).agregarParking(parking);
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text("Parqueadero registrado correctamente"),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'presentation/views/splash/splash_screen.dart';
 
 void main() {
   runApp(const RedParkingApp());
@@ -10,17 +11,9 @@ class RedParkingApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'RedParking',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(title: const Text('RedParking')),
-        body: const Center(
-          child: Text(
-            'Bienvenido a RedParking',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      ),
+      title: 'RedParking',
+      home: const SplashScreen(),
     );
   }
 }

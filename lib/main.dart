@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'presentation/views/splash/splash_screen.dart';
-import 'presentation/viewmodels/parking_viewmodel.dart';
+import 'core/constants/app_routes.dart';
+
+import 'presentation/auth/login_screen.dart';
+
+import 'presentation/super_admin/dashboard_super_admin.dart';
+import 'presentation/owner/dashboard_owner.dart';
+import 'presentation/employee/dashboard_employee.dart';
+import 'presentation/client/dashboard_client.dart';
 
 void main() {
-  runApp(
-    MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => ParkingViewModel())],
-      child: const RedParkingApp(),
-    ),
-  );
+  runApp(const RedParkingApp());
 }
 
 class RedParkingApp extends StatelessWidget {
@@ -21,7 +21,14 @@ class RedParkingApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'RedParking',
-      home: const SplashScreen(),
+      initialRoute: AppRoutes.login,
+      routes: {
+        AppRoutes.login: (_) => const LoginScreen(),
+        AppRoutes.superAdmin: (_) => const DashboardSuperAdmin(),
+        AppRoutes.owner: (_) => const DashboardOwner(),
+        AppRoutes.employee: (_) => const DashboardEmployee(),
+        AppRoutes.client: (_) => const DashboardClient(),
+      },
     );
   }
 }
